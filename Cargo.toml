@@ -1,0 +1,24 @@
+[package]
+name = "logqtt"
+version = "0.1.0"
+edition = "2024"
+
+[[bin]]
+name = "jqtt"
+required-features = ["runnable", "journal-adapter"]
+
+[dependencies]
+env_logger = "0.11"
+log = "0.4"
+rumqttc = "0.25"
+serde = "1.0"
+serde_json = "1.0"
+systemd = { version = "0.10", optional = true }
+argh = { version = "0.1", optional = true }
+whoami = { version = "1.6", optional = true }
+signal-hook = "0.3.18"
+
+[features]
+journal-adapter = ["dep:systemd"]
+runnable = ["dep:argh", "dep:whoami"]
+runnable-systemd = ["runnable"]
